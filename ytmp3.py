@@ -28,8 +28,7 @@ os.system("mkdir -p " + dst)
 
 print('Extracting audio....')
 
-return_code = os.system('ffmpeg -i /tmp/"' + title  + '"' + '.' + codec + ' "' + dst + title + '.mp3" > /dev/null 2>&1')
-
+return_code = os.system('ffmpeg -i /tmp/"' + title  + '"' + '.' + codec + ' -qscale:a 0 "' + dst + title + '.mp3" > /dev/null 2>&1')
 print('ffmpeg exit with code: '+str(return_code))
 
 os.system("rm /tmp/'" + title + "." + codec+ "'")
