@@ -30,9 +30,6 @@ with click.progressbar(label="Extracting audio..", length=100) as bar:
         bar.update(25)
         os.system("mkdir -p " + dst)
         bar.update(10)
-        #print('Extracting audio....')
-
-        #with click.progressbar(label="Extracting audio..", length=100) as bar:
         return_code = os.system('ffmpeg -i /tmp/"' + title  + '"' + '.' + codec + ' -qscale:a 0 "' + dst + title + '.mp3" > /dev/null 2>&1')
         bar.update(40)
 
