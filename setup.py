@@ -8,5 +8,5 @@ setup(name='YTtoMp3',
       author_email='jacopo.cavallo@protonmail.com',
       license='GPL',
       packages=['YTtoMp3'],
-      install_requires=['pytube',],
+      install_requires=['pytube','click'],
       zip_safe=False)
