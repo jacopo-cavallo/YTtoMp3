@@ -16,30 +16,39 @@ vd = YouTube(url)
 title = vd.filename
 dst = "$HOME/YTmusic/"
 
-print('Title:' + title)
-print('Available codecs and resolutions: ')
+click.secho('Title:',nl=False, fg='green')
+click.secho(' '+title, bold=True, fg='blue')
+
+click.secho('Available codecs and resolutions:',fg='green')
 pprint(vd.get_videos())
 
-codec = raw_input('Choose an available codec: ')
-quality = raw_input('Choose an available resolution: ')
+click.secho('Choose an available codec (e.g. \'mp4\'): ', nl=False, fg='green')
+codec = raw_input()
+click.secho('Choose an available resolution (e.g. \'720p\'): ', nl=False, fg='green')
+quality = raw_input()
+
 
 with click.progressbar(label="Extracting audio..", length=100) as bar:
         video = vd.get(codec, quality)
         bar.update(25)
+        
         video.download('/tmp/')
         bar.update(25)
+        
         os.system("mkdir -p " + dst)
         bar.update(10)
+        
         return_code = os.system('ffmpeg -i /tmp/"' + title  + '"' + '.' + codec + ' -qscale:a 0 "' + dst + title + '.mp3" > /dev/null 2>&1')
         bar.update(40)
+        
 
-
-print('ffmpeg exit with code: '+str(return_code))
+click.secho('ffmpeg exit with code: '+str(return_code), fg='green')
 
 os.system("rm /tmp/'" + title + "." + codec+ "'")
 
 if(return_code):
-        print("Ops! We've got an error while extracting audio..You should check parameters..")
+        click.secho("Ops! We've got an error while extracting audio..You should check parameters..", bg='red', fg='white', bold=True)
         exit(1)
 
-print("Audio saved in " + dst)
+click.secho("Audio saved in " + dst, bold=True, fg='blue')
+                                                                                                                                                                              53,58         Fon
